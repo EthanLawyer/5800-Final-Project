@@ -4,6 +4,7 @@ Author: Yixiao Zhu
 '''
 
 import requests
+KEY_WORD = "http"
 
 def grab_data(url):
     '''
