@@ -8,8 +8,10 @@ import pandas as pd
 
 STARTING_INDEX = 0
 ENDING_INDEX = -1
-KEY_WORD = "http"
 LETTERS_TO_REMOVE = "\ufeff"
+LETTERS_TO_SUBSTITUTE = ", "
+LINE_BREAK = "\r\n"
+LINE_SEPARATOR = ";"
 
 def create_dataframe(text):
     '''
@@ -27,12 +29,12 @@ def create_dataframe(text):
 
     if isinstance(text, str):
 
-        splitted_data = text.split("\r\n") # note: all lines in the csv end with \r\n
+        splitted_data = text.split(LINE_BREAK) # note: all lines in the csv end with \r\n
 
         if len(splitted_data) == 1:
             raise ValueError("Error. The inputted text does not contain correct csv data.") # if the string in data does not contain the delimiter we assigned, it returns a list of one element
 
-        column_titles = splitted_data[STARTING_INDEX].split(";") # getting a list of all the column titles
+        column_titles = splitted_data[STARTING_INDEX].split(LINE_SEPARATOR) # getting a list of all the column titles
 
         if len(column_titles) == 1:
             raise ValueError("Error. The inputted text does not contain correct csv data.") # if the string of column titles does not contain the delimiter we assigned, it returns a list of one element
@@ -40,7 +42,9 @@ def create_dataframe(text):
         rows = []
 
         for row in splitted_data[STARTING_INDEX+1 : ENDING_INDEX]: # splitting each row by ";" 
-            row_splitted = row.split(";")
+            if LETTERS_TO_SUBSTITUTE in row:
+                row = row.replace(LETTERS_TO_SUBSTITUTE, LINE_SEPARATOR)
+            row_splitted = row.split(LINE_SEPARATOR)
 
             if len(row_splitted) == 1:
                 raise ValueError("Error. The inputted text does not contain correct csv data.") # if the string in data does not contain the delimiter we assigned, it returns a list of one element
@@ -49,7 +53,7 @@ def create_dataframe(text):
                 if row_splitted != [""]: # delete any blank row
                     rows.append(row_splitted)
 
-        raw_df = pandas.DataFrame(rows, columns = column_titles) # create a raw pandas dataframe for further cleaning
+        raw_df = pd.DataFrame(rows, columns = column_titles) # create a raw pandas dataframe for further cleaning
 
         return raw_df
 
