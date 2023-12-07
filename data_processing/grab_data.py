@@ -2,7 +2,6 @@
 Grabs the csv data from the url and returns it as a pandas dataframe.
 Author: Yixiao Zhu
 '''
-
 import pandas as pd
 KEY_WORD = "http"
 

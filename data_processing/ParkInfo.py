@@ -2,7 +2,6 @@
 The class of ParkInfo is used to store information about a park in Greater Vancouver Area, including its ID, name, geographic coordinates and facilities.
 Author: Yixiao Zhu
 '''
-
 PARAMS_NUM = 5
 
 class ParkInfo:

@@ -2,9 +2,7 @@
 Cleans the raw pandas dataframe of csv file, and returns a cleaned pandas dataframe.
 Author: Yixiao Zhu
 '''
-from grab_data import grab_data
 import pandas as pd
-
 STARTING_INDEX = 0
 ENDING_INDEX = -1
 

@@ -2,9 +2,7 @@
 Merge and process the two dataframes, and output processed data as a list.
 Author: Yixiao Zhu
 '''
-from grab_data import *
-from clean_data import *
-from ParkInfo import *
+from data_processing.ParkInfo import ParkInfo
 import pandas as pd
 
 COMMON_COLUMNS = ['ParkID', 'Name']
