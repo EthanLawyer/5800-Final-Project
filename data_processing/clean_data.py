@@ -34,13 +34,6 @@ def clean_dataframe(raw_df, needed_indices):
         cleaned_df = cleaned_df.dropna() # drop any row with missing values
         cleaned_df = cleaned_df.reset_index(drop=True) # reset the index
         
-        for i in range(len(cleaned_df)): # convert all the ParkID from str to int
-            item = cleaned_df.iloc[i, STARTING_INDEX]
-            '''if item.isnumeric():
-                cleaned_df.iloc[i, STARTING_INDEX] = int(item)
-            else:
-                raise ValueError("Wrong input data.")'''
-        cleaned_df.iloc[i, STARTING_INDEX] = int(item) # newly added
         cleaned_df = cleaned_df.sort_values(by = cleaned_df.columns[STARTING_INDEX]) # sorting the parks in the numerical order of ParkID
         cleaned_df = cleaned_df.reset_index(drop = True) # reset the disordered indices
         
