@@ -56,8 +56,8 @@ class ParkInfo:
         Parameters:
             None
         Returns:
-            a list of the park's information
+            a list of the park's information (without parkid) for further processing
         Raises:
             None
         '''
-        return [self.parkid, self.name, self.longitude, self.latitude, self.facilities]
+        return [self.name, self.longitude, self.latitude, self.facilities]
