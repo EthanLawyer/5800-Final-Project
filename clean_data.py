@@ -9,7 +9,6 @@ import pandas as pd
 STARTING_INDEX = 0
 ENDING_INDEX = -1
 LETTERS_TO_REMOVE = "\ufeff"
-LETTERS_TO_SUBSTITUTE = ", "
 LINE_BREAK = "\r\n"
 LINE_SEPARATOR = ";"
 
@@ -42,9 +41,7 @@ def create_dataframe(text):
         rows = []
 
         for row in splitted_data[STARTING_INDEX+1 : ENDING_INDEX]: # splitting each row by ";" 
-            if LETTERS_TO_SUBSTITUTE in row:
-                row = row.replace(LETTERS_TO_SUBSTITUTE, LINE_SEPARATOR)
-            
+ 
             if LETTERS_TO_REMOVE in row:
                 row = row.replace(LETTERS_TO_REMOVE, "")
             
@@ -58,7 +55,6 @@ def create_dataframe(text):
                     rows.append(row_splitted)
 
         raw_df = pd.DataFrame(rows, columns = column_titles) # create a raw pandas dataframe for further cleaning
-        raw_df = raw_df.drop(raw_df.index[0])   # drop the first row of the dataframe, which is the column titles
 
         return raw_df
 
@@ -93,16 +89,16 @@ def clean_dataframe(raw_df, indices):
         cleaned_df = cleaned_df.reset_index(drop=True) # reset the index
         
         for i in range(len(cleaned_df)): # convert all the ParkID from str to int
-                item = cleaned_df.iloc[i, STARTING_INDEX]
-                if item.isnumeric():
-                    cleaned_df.iloc[i, STARTING_INDEX] = int(item)
-                else:
-                    raise ValueError("Wrong input data.")
+            item = cleaned_df.iloc[i, STARTING_INDEX]
+            if item.isnumeric():
+                cleaned_df.iloc[i, STARTING_INDEX] = int(item)
+            else:
+                raise ValueError("Wrong input data.")
         
         cleaned_df = cleaned_df.sort_values(by = cleaned_df.columns[STARTING_INDEX]) # sorting the parks in the numerical order of ParkID
         cleaned_df = cleaned_df.reset_index(drop = True) # reset the disordered indices
-
+        
         return cleaned_df
-    
+
     except IndexError as idx_err:
         raise IndexError(f"Error. The inputted data is not correct Park data. Please check again. {idx_err}")
