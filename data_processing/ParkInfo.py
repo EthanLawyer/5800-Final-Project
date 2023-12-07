@@ -3,6 +3,8 @@ The class of ParkInfo is used to store information about a park in Greater Vanco
 Author: Yixiao Zhu
 '''
 
+PARAMS_NUM = 5
+
 class ParkInfo:
     '''
         Class: ParkInfo
@@ -12,7 +14,7 @@ class ParkInfo:
         '''
         Constructor -- create a new instance of Park
         Parameters:
-            parkid -- an int, the park's ID
+            parkid -- an str, the park's ID, has to be an integer string
             name -- a str, the park's name
             longitude -- a float, the park's longitude
             latitude -- a float, the park's latitude
@@ -25,8 +27,8 @@ class ParkInfo:
         if len([parkid, name, longitude, latitude, facilities]) != PARAMS_NUM:
             raise TypeError("Class Park requires 5 argument: parkid, name, longitude, latitude, facilities.")
 
-        elif isinstance(parkid, int) == False:
-            raise TypeError("Wrong input: parkid should be an int.")
+        elif parkid.isnumeric() == False:
+            raise TypeError("Wrong input: parkid should be an integer string.")
 
         elif isinstance(name, str) == False:
             raise TypeError("Wrong input: name should be a str.")
@@ -34,7 +36,7 @@ class ParkInfo:
         elif isinstance(longitude, float) == False:
             raise TypeError("Wrong input: longitude should be a float.")
 
-        elif isinstance(latitude, bool) == False:
+        elif isinstance(latitude, float) == False:
             raise TypeError("Wrong input: latitude should be a float.")
 
         elif isinstance(facilities, list) == False:
@@ -57,7 +59,5 @@ class ParkInfo:
             None
         Returns:
             a list of the park's information (without parkid) for further processing
-        Raises:
-            None
         '''
         return [self.name, self.longitude, self.latitude, self.facilities]
