@@ -1,4 +1,13 @@
 def get_selected_park_indices(sorted_facilities_list, selected_facilities_indices, processed_data):
+    '''
+    Function: Get indices of parks that have all selected facilities.
+    Parameters:
+        sorted_facilities_list -- a sorted list of unique park facility names
+        selected_facilities_indices -- a list of indices representing selected facilities
+        processed_data -- a list of ParkInfo objects, the processed data
+    Returns:
+        selected_park_indices -- a list of indices of parks that have all selected facilities
+    '''
     selected_park_indices = []
 
     for index, park_info in enumerate(processed_data):
@@ -13,12 +22,11 @@ def get_selected_park_indices(sorted_facilities_list, selected_facilities_indice
 
 def get_park_utility_list(processed_data):
     '''
-    Function: Get a list of park utility values between 0.7 and 1 based on the count at
-    index 3 (The amount of facilities in each park) in processed_data.
+    Function: Transform park data to include a utility value based on facility count.
     Parameters:
         processed_data -- a list of ParkInfo objects, the processed data
     Returns:
-        utility_list -- a list of utility values for each park based on the count at index 3
+        transformed_data -- a list of park data with transformed utility values
     '''
     transformed_data = []
     max_count_at_index_3 = max(len(park_info[3]) for park_info in processed_data)

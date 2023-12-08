@@ -1,6 +1,6 @@
 '''
 This is the main program that retrieve and process the data, and optimize route for the user's travel plan.
-Author: Yixiao Zhu, Xin Sun
+Author: Yixiao Zhu, Xin Sun, Haoning Wang
 '''
 from data_process_next.get_facilities_list import get_sorted_unique_facilities
 from data_process_next.get_park_utility_list import get_selected_park_indices, get_park_utility_list
@@ -35,7 +35,7 @@ def main():
         sorted_facilities_list = get_sorted_unique_facilities(processed_data)
         parks_per_day = display_max_parks_per_day_menu();
         display_facility_menu(sorted_facilities_list)
-        selected_facilities = get_selected_facilities()
+        selected_facilities = get_selected_facilities(sorted_facilities_list)
         index_data = get_selected_park_indices(sorted_facilities_list, selected_facilities, processed_data)
         park_utility_list = get_park_utility_list(processed_data)
 

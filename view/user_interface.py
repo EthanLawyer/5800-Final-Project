@@ -4,10 +4,21 @@ def display_facility_menu(sorted_facilities_list):
         print(f"{index + 1}. {facility}")
 
 
-def get_selected_facilities():
-    selected_facilities_indices = input(
-        "Please enter facility numbers, separate multiple facilities with commas(','): ")
-    return [int(i) for i in selected_facilities_indices.split(',')]
+def get_selected_facilities(sorted_facilities_list):
+    length = len(sorted_facilities_list)
+    while True:
+        selected_facilities_indices = input(
+            "Please enter facility numbers, separate multiple facilities with commas(','): ")
+        facility_indices = selected_facilities_indices.split(',')
+        try:
+            selected_indices = [int(index) for index in facility_indices]
+
+            if all(index > 0 and index <= length for index in selected_indices):
+                return selected_indices
+            else:
+                print(f"Invalid input. Please enter positive integers between 1 and {length} separated by commas.")
+        except ValueError:
+            print("Invalid input. Please enter valid integers separated by commas.")
 
 
 def get_selected_park_indices(sorted_facilities_list, selected_facilities_indices, processed_data):
@@ -23,14 +34,12 @@ def get_selected_park_indices(sorted_facilities_list, selected_facilities_indice
     return selected_park_indices
 
 def display_max_parks_per_day_menu():
-    '''
-    Function: Get the maximum number of parks a user can visit in a day.
-    Returns:
-        max_parks -- an integer representing the maximum number of parks per day
-    '''
-    try:
-        max_parks = int(input("Please enter the maximum number of parks you can visit in a day: "))
-        return max_parks
-    except ValueError:
-        print("Invalid input. Please enter a valid integer.")
-        return display_max_parks_per_day_menu()
+    while True:
+        try:
+            max_parks = int(input("Please enter the maximum number of parks you can visit in a day: "))
+            if max_parks > 0:
+                return max_parks
+            else:
+                print("Please enter a positive integer greater than 0.")
+        except ValueError:
+            print("Invalid input. Please enter a valid integer.")
