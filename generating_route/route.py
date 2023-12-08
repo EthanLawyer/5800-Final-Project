@@ -63,13 +63,18 @@ class Route():
             day_route, day_distance = self.prim()
             self.final_routes.append(day_route + ", total travel distance: " + str(day_distance) + "km")
 
-    def display_results(self):
+    def validate_data(self):
+        if len(self.data) == 0:
+            raise ValueError("There is no park satisfying your preferences. Please choose less facilities.")
+
+    def processing_data(self):
+        self.validate_data()
         self.add_self_location()
-        if len(self.data) == 1:
-            print("There is no park satisfying all of your preferences. Please choose less facilities.")
-            return
         self.build_graph()
         self.compute_all_routes()
+
+    def display_results(self):
+        self.processing_data()
         print("Comprehensively considering your location and preferences, here are the recommended routes:")
         for item in self.final_routes:
             print(item)
