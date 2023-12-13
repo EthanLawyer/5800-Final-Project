@@ -22,6 +22,7 @@ Our approach involved leveraging official data from government public databases 
 
 
 **Usage:**
+
 To use the program, run _main_program.py_, and type in the number of parks:
 
 ![image](https://github.com/EthanLawyer/5800-Final-Project/assets/133042033/1188f12a-6218-43ec-b0b3-965328ed143d)
